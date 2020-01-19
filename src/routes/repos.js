@@ -40,7 +40,7 @@ module.exports = app => {
           "description": repo["description"],
           "technology": [],
           "openSource": true,
-          "repositoryURL": repo["url"],
+          "repositoryURL": repo["html_url"],
           "live": false,
           "liveURL": "",
           "authors": []
