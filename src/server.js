@@ -9,9 +9,16 @@ require("dotenv").config();
 // Modules
 const express = require("express");
 const graphqlHTTP = require("express-graphql");
+const crypto = require("crypto");
+const fs = require("fs");
+const path = require("path");
+const mongoose = require("mongoose");
 
 // GraphQL
 const RootSchema = require("./graphql/schemas/RootSchema");
+
+/* Mongoose */
+mongoose.connect(process.env.MONGO_DB, { useNewUrlParser: true, useUnifiedTopology: true });
 
 /* Server */
 // Init.
@@ -23,7 +30,37 @@ app.use("/graphql", graphqlHTTP({
   graphiql: (process.env.NODE_ENV === "dev" ? true : false)
 }));
 
+// Generate server token to refresh repos
+let token = "token";
+if(process.env.NODE_ENV != "dev") {
+  token = crypto.randomBytes(32).toString("hex");
+}
+app["token"] = token;
+
 // Routes
+const loadRoutes = (dir) => {
+  fs.readdir(dir, (error, files) => {
+    if(error) {
+      console.log("Could not get files.");
+    } else {
+      files.forEach(file => {
+        let filePath = path.join(dir, file);
+        if(fs.lstatSync(filePath).isDirectory()) {
+          loadRoutes(filePath);
+        } else {
+          try {
+            require(filePath)(app);
+            console.log(`Loaded route '${file}'.`);
+          } catch(error) {
+            console.log(error);
+          }
+        }
+      });
+    }
+  });
+};
+
+loadRoutes(path.join(__dirname, "./routes"));
 
 // Listen
-app.listen(process.env.PORT, () => console.log(`Server listening on port ${process.env.PORT}.`));
+app.listen(process.env.PORT, () => console.log(`Server listening on port ${process.env.PORT}. Token is '${token}'.`));

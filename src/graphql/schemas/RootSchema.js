@@ -1,27 +1,20 @@
 /*
-* David Shefcik
+* David Shefcik 2020
 */
 
 /* Imports */
 // Modules
 const {
-  GraphQLSchema,
-  GraphQLObjectType,
-  GraphQLString
+  GraphQLSchema
 } = require("graphql");
 
+// Types
+const RootQueryType = require("../types/RootQuery");
+
 /* Schema */
-const RootQueryType = new GraphQLSchema({
-  query: new GraphQLObjectType({
-    name: "Hello",
-    fields: () => ({
-      message: {
-        type: GraphQLString,
-        resolve: () => "Hello!"
-      }
-    })
-  })
+const RootSchema = new GraphQLSchema({
+  query: RootQueryType
 });
 
 /* Export */
-module.exports = RootQueryType;
+module.exports = RootSchema;
