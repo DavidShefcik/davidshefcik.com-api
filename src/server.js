@@ -8,6 +8,7 @@ require("dotenv").config();
 
 // Modules
 const express = require("express");
+const bodyParser = require("body-parser");
 const graphqlHTTP = require("express-graphql");
 const crypto = require("crypto");
 const fs = require("fs");
@@ -25,6 +26,9 @@ mongoose.connect(process.env.MONGO_DB, { useNewUrlParser: true, useUnifiedTopolo
 const app = express();
 
 // Middleware
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
+
 app.use("/graphql", graphqlHTTP({
   schema: RootSchema,
   graphiql: (process.env.NODE_ENV === "dev" ? true : false)
