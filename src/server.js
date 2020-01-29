@@ -66,5 +66,8 @@ const loadRoutes = (dir) => {
 
 loadRoutes(path.join(__dirname, "./routes"));
 
+// Port
+const port = process.env.PORT || 8080;
+
 // Listen
-app.listen(process.env.PORT, () => console.log(`Server listening on port ${process.env.PORT}. Token is '${token}'.`));
+app.listen(port, () => console.log(`Server listening on port ${process.env.PORT}. Token is '${token}'.`));
