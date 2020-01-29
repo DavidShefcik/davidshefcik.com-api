@@ -19,6 +19,7 @@ phases:
     commands:
       - echo "In the pre build phase."
   build:
+    commands:
       - echo "Done with build. Removing old package.json."
   post_build:
     commands:
