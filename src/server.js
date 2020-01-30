@@ -11,12 +11,7 @@ const crypto = require("crypto");
 const fs = require("fs");
 const path = require("path");
 const mongoose = require("mongoose");
-
-console.log("env: " + process.env.NODE_ENV);
-console.log("github: " + process.env.GITHUB_TOKEN);
-console.log("db: " + process.env.MONGO_DB);
-console.log("captcha: " + process.env.RECAPTCHA_SECRET_KEY);
-console.log("email: " + process.env.EMAIL);
+const cors = require("cors");
 
 // GraphQL
 const RootSchema = require("./graphql/schemas/RootSchema");
@@ -31,6 +26,8 @@ const app = express();
 // Middleware
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
+
+app.use(cors());
 
 app.use("/graphql", graphqlHTTP({
   schema: RootSchema,
