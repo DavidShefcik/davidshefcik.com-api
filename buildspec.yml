@@ -3,9 +3,6 @@ version: 0.2
 env:
   parameter-store:
     NODE_ENV: "davidshefcikcom-api-node-env"
-    GITHUB_TOKEN: "davidshefcikcom-api-github-token"
-    MONGO_DB: "davidshefcikcom-api-mongodb"
-    RECAPTCHA_SECRET_KEY: "davidshefcikcom-api-recaptcha-secret"
     EMAIL: "davidshefcikcom-api-email"
 
 phases:
@@ -25,9 +22,6 @@ phases:
     commands:
       - echo "In the post build phase."
       - echo $NODE_ENV
-      - echo $GITHUB_TOKEN
-      - echo $MONGO_DB
-      - echo $RECAPTCHA_SECRET_KEY
       - echo $EMAIL
       
 artifacts:
