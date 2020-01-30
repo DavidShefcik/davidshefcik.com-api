@@ -18,13 +18,17 @@ phases:
   pre_build:
     commands:
       - echo "In the pre build phase."
-      - echo $MONGO_DB
   build:
     commands:
       - echo "Done with build. Removing old package.json."
   post_build:
     commands:
       - echo "In the post build phase."
+      - echo $NODE_ENV
+      - echo $GITHUB_TOKEN
+      - echo $MONGO_DB
+      - echo $RECAPTCHA_SECRET_KEY
+      - echo $EMAIL
       
 artifacts:
   files:
