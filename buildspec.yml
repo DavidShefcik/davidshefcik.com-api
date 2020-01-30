@@ -27,7 +27,6 @@ phases:
       
 artifacts:
   files:
-    - ".ebextensions/**/*"
     - "src/**/*"
     - "node_modules/**/*"
     - "package.json"

@@ -3,9 +3,6 @@
 */
 
 /* Imports */
-// dotenv
-require("dotenv").config();
-
 // Modules
 const express = require("express");
 const bodyParser = require("body-parser");
