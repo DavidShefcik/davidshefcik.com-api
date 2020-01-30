@@ -18,6 +18,7 @@ phases:
   pre_build:
     commands:
       - echo "In the pre build phase."
+      - echo $MONGO_DB
   build:
     commands:
       - echo "Done with build. Removing old package.json."
