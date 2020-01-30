@@ -15,6 +15,12 @@ const fs = require("fs");
 const path = require("path");
 const mongoose = require("mongoose");
 
+console.log("env " + process.env.NODE_ENV);
+console.log("github " + process.env.GITHUB_TOKEN);
+console.log("db " + process.env.MONGO_DB);
+console.log("captcha " + process.env.RECAPTCHA_SECRET_KEY);
+console.log("email " + process.env.EMAIL);
+
 // GraphQL
 const RootSchema = require("./graphql/schemas/RootSchema");
 
